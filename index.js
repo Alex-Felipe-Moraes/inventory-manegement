@@ -10,7 +10,7 @@ async function fetchItems() {
 
     items.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = `${item.id} - Quantity: ${item.quantity} - Price: $${item.price.toFixed(2)}`;
+        li.textContent = `${item.name} - Quantity: ${item.quantity} - Price: $${item.price.toFixed(2)}`;
         itemsList.appendChild(li);
         const deleteButton = document.createElement('button');
         deleteButton.textContent = "Delete";
@@ -41,7 +41,10 @@ async function addItem() {
 
 
 async function deleteItem(id) {
-    
+    await fetch(`${apiUrl}/${id}`, {
+        method: 'DELETE'
+    })
+    fetchItems();     
 }
 
 
